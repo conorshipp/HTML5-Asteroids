@@ -429,8 +429,8 @@ Ship = function () {
 
     // limit the ship's speed
     if (Math.sqrt(this.vel.x * this.vel.x + this.vel.y * this.vel.y) > 8) {
-      this.vel.x *= 0.95;
-      this.vel.y *= 0.95;
+      this.vel.x *= 0.5;
+      this.vel.y *= 0.5;
     }
   };
 
