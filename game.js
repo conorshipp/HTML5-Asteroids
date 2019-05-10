@@ -411,7 +411,6 @@ Ship = function () {
         this.bulletCounter = 10;
         for (var i = 0; i < this.bullets.length; i++) {
           if (!this.bullets[i].visible) {
-            SFX.laser();
             var bullet = this.bullets[i];
             var rad = ((this.rot-90) * Math.PI)/180;
             var vectorx = Math.cos(rad);
@@ -436,7 +435,6 @@ Ship = function () {
   };
 
   this.collision = function (other) {
-    SFX.explosion();
     Game.explosionAt(other.x, other.y);
     Game.FSM.state = 'player_died';
     this.visible = false;
@@ -539,7 +537,6 @@ BigAlien = function () {
           bullet.vel.x = 6 * vectorx;
           bullet.vel.y = 6 * vectory;
           bullet.visible = true;
-          SFX.laser();
           break;
         }
       }
@@ -549,7 +546,6 @@ BigAlien = function () {
 
   BigAlien.prototype.collision = function (other) {
     if (other.name == "bullet") Game.score += 200;
-    SFX.explosion();
     Game.explosionAt(other.x, other.y);
     this.visible = false;
     this.newPosition();
@@ -655,7 +651,6 @@ Asteroid = function () {
   this.collidesWith = ["ship", "bullet", "bigalien", "alienbullet"];
 
   this.collision = function (other) {
-    SFX.explosion();
     if (other.name == "bullet") Game.score += 120 / this.scale;
     this.scale /= 3;
     if (this.scale > 0.5) {
@@ -838,36 +833,6 @@ Text = {
   face: null
 };
 
-SFX = {
-  laser:     new Audio('39459__THE_bizniss__laser.wav'),
-  explosion: new Audio('51467__smcameron__missile_explosion.wav')
-};
-
-// preload audio
-for (var sfx in SFX) {
-  (function () {
-    var audio = SFX[sfx];
-    audio.muted = true;
-    audio.play();
-
-    SFX[sfx] = function () {
-      if (!this.muted) {
-        if (audio.duration == 0) {
-          // somehow dropped out
-          audio.load();
-          audio.play();
-        } else {
-          audio.muted = false;
-          audio.currentTime = 0;
-        }
-      }
-      return audio;
-    }
-  })();
-}
-// pre-mute audio
-SFX.muted = true;
-
 Game = {
   score: 0,
   totalAsteroids: 5,
@@ -917,7 +882,7 @@ Game = {
       this.state = 'waiting';
     },
     waiting: function () {
-      Text.renderText(window.ipad ? 'Touch Screen to Start' : 'Press Space to Start', 36, Game.canvasWidth/2 - 270, Game.canvasHeight/2);
+      Text.renderText('Press Space to Start', 36, Game.canvasWidth/2 - 270, Game.canvasHeight/2);
       if (KEY_STATUS.space || window.gameStart) {
         KEY_STATUS.space = false; // hack so we don't shoot right away
         window.gameStart = false;
@@ -1207,11 +1172,6 @@ $(function () {
           mainLoop();
         }
         break;
-      case 'm': // mute
-        SFX.muted = !SFX.muted;
-        break;
     }
   });
 });
-
-// vim: fdl=0
