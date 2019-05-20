@@ -11,3 +11,7 @@
   top: 0px;
   left: 0px;
 }
+
+body {
+  background-image: url(assets/background.png);
+}
