@@ -811,7 +811,7 @@ Text = {
     }
   },
 
-  renderText: function(text, size, x, y) {
+  renderText: function(text, size, colour, x, y) {
     this.context.save();
 
     this.context.translate(x, y);
@@ -824,6 +824,7 @@ Text = {
     for (var i = 0; i < charsLength; i++) {
       this.renderGlyph(this.context, this.face, chars[i]);
     }
+    this.context.fillStyle = colour;
     this.context.fill();
 
     this.context.restore();
@@ -882,7 +883,7 @@ Game = {
       this.state = 'waiting';
     },
     waiting: function () {
-      Text.renderText('Press Space to Start', 36, Game.canvasWidth/2 - 270, Game.canvasHeight/2);
+      Text.renderText('Press Space to Start', 36, "black", Game.canvasWidth/2 - 270, Game.canvasHeight/2);
       if (KEY_STATUS.space || window.gameStart) {
         KEY_STATUS.space = false; // hack so we don't shoot right away
         window.gameStart = false;
@@ -962,7 +963,7 @@ Game = {
       }
     },
     end_game: function () {
-      Text.renderText('GAME OVER', 50, Game.canvasWidth/2 - 160, Game.canvasHeight/2 + 10);
+      Text.renderText('GAME OVER', 50, "black", Game.canvasWidth/2 - 160, Game.canvasHeight/2 + 10);
       if (this.timer == null) {
         this.timer = Date.now();
       }
@@ -1126,7 +1127,7 @@ $(function () {
 
     // score
     var score_text = ''+Game.score;
-    Text.renderText(score_text, 18, Game.canvasWidth - 14 * score_text.length, 20);
+    Text.renderText(score_text, 18, "black", Game.canvasWidth - 14 * score_text.length, 20);
 
     // extra dudes
     for (i = 0; i < Game.lives; i++) {
@@ -1139,7 +1140,7 @@ $(function () {
     }
 
     if (showFramerate) {
-      Text.renderText(''+avgFramerate, 24, Game.canvasWidth - 38, Game.canvasHeight - 2);
+      Text.renderText(''+avgFramerate, 24, "black", Game.canvasWidth - 38, Game.canvasHeight - 2);
     }
 
     frameCount++;
@@ -1151,7 +1152,7 @@ $(function () {
     }
 
     if (paused) {
-      Text.renderText('PAUSED', 72, Game.canvasWidth/2 - 160, 120);
+      Text.renderText('PAUSED', 72, "black", Game.canvasWidth/2 - 160, 120);
     } else {
       requestAnimFrame(mainLoop, canvasNode);
     }
