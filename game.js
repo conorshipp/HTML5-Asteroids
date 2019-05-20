@@ -883,7 +883,7 @@ Game = {
       this.state = 'waiting';
     },
     waiting: function () {
-      Text.renderText('Press Space to Start', 36, "black", Game.canvasWidth/2 - 270, Game.canvasHeight/2);
+      Text.renderText('Press Space to Start', 40, "black", Game.canvasWidth/2 - 270, Game.canvasHeight/2);
       if (KEY_STATUS.space || window.gameStart) {
         KEY_STATUS.space = false; // hack so we don't shoot right away
         window.gameStart = false;
