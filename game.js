@@ -372,14 +372,14 @@ Ship = function () {
             [-5,   4,
               0, -12,
               5,   4],
-            "black");
+            "white");
 
   this.children.exhaust = new Sprite();
   this.children.exhaust.init("exhaust",
                              [-3,  6,
                                0, 11,
                                3,  6],
-                             "black");
+                             "white");
 
   this.bulletCounter = 0;
 
@@ -460,7 +460,7 @@ BigAlien = function () {
              -12,   4,
              -20,   0,
               20,   0],
-            "black");
+            "white");
 
   this.children.top = new Sprite();
   this.children.top.init("bigalien_top",
@@ -468,7 +468,7 @@ BigAlien = function () {
                           -6, -6,
                            6, -6,
                            8, -4],
-                         "black");
+                         "white");
   this.children.top.visible = true;
 
   this.children.bottom = new Sprite();
@@ -477,7 +477,7 @@ BigAlien = function () {
                               6, 6,
                              -6, 6,
                              -8, 4],
-                           "black");
+                           "white");
   this.children.bottom.visible = true;
 
   this.collidesWith = ["asteroid", "ship", "bullet"];
@@ -576,7 +576,7 @@ BigAlien = function () {
 BigAlien.prototype = new Sprite();
 
 Bullet = function () {
-  this.init("bullet", [0, 0], "black");
+  this.init("bullet", [0, 0], "white");
   this.time = 0;
   this.bridgesH = false;
   this.bridgesV = false;
@@ -650,7 +650,7 @@ Asteroid = function () {
                2, -10,
               -4, -10,
               -4,  -5],
-            "black");
+            "white");
 
   this.visible = true;
   this.scale = 6;
@@ -891,7 +891,7 @@ Game = {
       this.state = 'waiting';
     },
     waiting: function () {
-      Text.renderText('Press Space to Start', 40, "black", Game.canvasWidth/2 - 270, Game.canvasHeight/2);
+      Text.renderText('Press Space to Start', 40, "white", Game.canvasWidth/2 - 270, Game.canvasHeight/2);
       if (KEY_STATUS.space || window.gameStart) {
         KEY_STATUS.space = false; // hack so we don't shoot right away
         window.gameStart = false;
@@ -971,7 +971,7 @@ Game = {
       }
     },
     end_game: function () {
-      Text.renderText('GAME OVER', 50, "black", Game.canvasWidth/2 - 160, Game.canvasHeight/2 + 10);
+      Text.renderText('GAME OVER', 50, "white", Game.canvasWidth/2 - 160, Game.canvasHeight/2 + 10);
       if (this.timer == null) {
         this.timer = Date.now();
       }
@@ -1141,7 +1141,7 @@ $(function () {
 
     // score
     var score_text = ''+Game.score;
-    Text.renderText(score_text, 18, "black", Game.canvasWidth - 14 * score_text.length, 20);
+    Text.renderText(score_text, 18, "white", Game.canvasWidth - 14 * score_text.length, 20);
 
     // extra dudes
     for (i = 0; i < Game.lives; i++) {
@@ -1154,7 +1154,7 @@ $(function () {
     }
 
     if (showFramerate) {
-      Text.renderText(''+avgFramerate, 24, "black", Game.canvasWidth - 38, Game.canvasHeight - 2);
+      Text.renderText(''+avgFramerate, 24, "white", Game.canvasWidth - 38, Game.canvasHeight - 2);
     }
 
     frameCount++;
@@ -1166,7 +1166,7 @@ $(function () {
     }
 
     if (paused) {
-      Text.renderText('PAUSED', 72, "black", Game.canvasWidth/2 - 160, 120);
+      Text.renderText('PAUSED', 72, "white", Game.canvasWidth/2 - 160, 120);
     } else {
       requestAnimFrame(mainLoop, canvasNode);
     }
