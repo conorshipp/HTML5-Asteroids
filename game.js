@@ -987,6 +987,12 @@ Game = {
 
 $(function () {
   var canvas = $("#canvas");
+
+  // Set the width of the canvas to the same width as the page
+  canvas[0].width = document.body.clientWidth;
+  // Set the height of the canvas to the same height as the page
+  canvas[0].height = document.body.clientHeight;
+
   Game.canvasWidth  = canvas.width();
   Game.canvasHeight = canvas.height();
 
