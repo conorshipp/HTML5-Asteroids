@@ -1147,7 +1147,7 @@ $(function () {
     for (i = 0; i < Game.lives; i++) {
       context.save();
       extraDude.x = Game.canvasWidth - (8 * (i + 1));
-      extraDude.y = 32;
+      extraDude.y = 36;
       extraDude.configureTransform();
       extraDude.draw();
       context.restore();
