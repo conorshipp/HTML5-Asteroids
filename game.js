@@ -75,9 +75,10 @@ Matrix = function (rows, columns) {
 };
 
 Sprite = function () {
-  this.init = function (name, points) {
+  this.init = function (name, points, colour) {
     this.name     = name;
     this.points   = points;
+    this.colour   = colour;
 
     this.vel = {
       x:   0,
@@ -114,6 +115,7 @@ Sprite = function () {
 
   this.run = function(delta) {
 
+    this.context.strokeStyle = this.colour;
     this.move(delta);
     this.updateGrid();
 
@@ -369,13 +371,15 @@ Ship = function () {
   this.init("ship",
             [-5,   4,
               0, -12,
-              5,   4]);
+              5,   4],
+            "black");
 
   this.children.exhaust = new Sprite();
   this.children.exhaust.init("exhaust",
                              [-3,  6,
                                0, 11,
-                               3,  6]);
+                               3,  6],
+                             "black");
 
   this.bulletCounter = 0;
 
@@ -455,14 +459,16 @@ BigAlien = function () {
               12,   4,
              -12,   4,
              -20,   0,
-              20,   0]);
+              20,   0],
+            "black");
 
   this.children.top = new Sprite();
   this.children.top.init("bigalien_top",
                          [-8, -4,
                           -6, -6,
                            6, -6,
-                           8, -4]);
+                           8, -4],
+                         "black");
   this.children.top.visible = true;
 
   this.children.bottom = new Sprite();
@@ -470,7 +476,8 @@ BigAlien = function () {
                             [ 8, 4,
                               6, 6,
                              -6, 6,
-                             -8, 4]);
+                             -8, 4],
+                           "black");
   this.children.bottom.visible = true;
 
   this.collidesWith = ["asteroid", "ship", "bullet"];
@@ -569,7 +576,7 @@ BigAlien = function () {
 BigAlien.prototype = new Sprite();
 
 Bullet = function () {
-  this.init("bullet", [0, 0]);
+  this.init("bullet", [0, 0], "black");
   this.time = 0;
   this.bridgesH = false;
   this.bridgesV = false;
@@ -642,7 +649,8 @@ Asteroid = function () {
                5,  -6,
                2, -10,
               -4, -10,
-              -4,  -5]);
+              -4,  -5],
+            "black");
 
   this.visible = true;
   this.scale = 6;
